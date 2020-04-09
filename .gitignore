@@ -23,4 +23,8 @@
 hs_err_pid*
 
 # testing directory
-test
+test/.gradle
+test/build
+test/.idea
+test/run
+*.iml

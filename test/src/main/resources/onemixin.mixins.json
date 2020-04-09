@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.devtech.onemixin.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "PlayerBreakBlock"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

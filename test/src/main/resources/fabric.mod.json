@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "onemixin",
+  "version": "${version}",
+  "name": "OneMixin",
+  "description": "Simple events",
+  "authors": [
+    "HalfOf2"
+  ],
+  "license": "CC0-1.0",
+  "icon": "assets/onemixin/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.devtech.onemixin.OneMixin"
+    ]
+  },
+  "mixins": [
+    "onemixin.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.8.2+build.194",
+    "fabric": "*",
+    "minecraft": "1.15.2"
+  }
+}
