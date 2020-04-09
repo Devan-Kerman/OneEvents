@@ -3,7 +3,9 @@
   "package": "net.devtech.onemixin.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "PlayerBreakBlock"
+    "PlayerBreakBlock",
+    "PlayerLogin",
+    "WorldMixin"
   ],
   "client": [
   ],
