@@ -1,8 +1,11 @@
 package net.devtech.onemixin.mixin;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -34,20 +37,25 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  *
  * For more information, please refer to <http://unlicense.org/>
  */
-@Mixin (BlockItem.class)
-public class PlayerPlaceBlock {
-	@Inject(method = "place(Lnet/minecraft/item/ItemPlacementContext;Lnet/minecraft/block/BlockState;)Z", at = @At("HEAD"))
-	private void restrict(ItemPlacementContext context, BlockState state, CallbackInfoReturnable<Boolean> cir) {
-		if(this.restrict(context, state))
-			cir.setReturnValue(false);
+@Mixin(BlockState.class)
+public class OnUse {
+	@Inject(method = "onUse", at = @At("RETURN"))
+	private void use(World world, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
+		if(cir.getReturnValue() == ActionResult.PASS) {
+			cir.setReturnValue(this.onUse(world, player, hand, hit));
+		}
 	}
 
 	/**
-	 * @param context the context of the placement
-	 * @param state the state to place
-	 * @return return true if the player cannot place a block there
+	 * Called when a player right clicks on the block
+	 * @param world the world this blockstate is in
+	 * @param entity the player that clicked it
+	 * @param hand which hand the player used to click it
+	 * @param result the result of the block
+	 * @return the action to perform
 	 */
-	public boolean restrict(ItemPlacementContext context, BlockState state) {
-		return true;
+	private ActionResult onUse(World world, PlayerEntity entity, Hand hand, BlockHitResult result) {
+		return ActionResult.PASS;
 	}
+
 }

@@ -1,3 +1,5 @@
+package net.devtech.onemixin.mixin;
+
 import com.mojang.authlib.GameProfile;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.text.LiteralText;
