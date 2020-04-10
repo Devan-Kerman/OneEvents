@@ -5,7 +5,14 @@
   "mixins": [
     "PlayerBreakBlock",
     "PlayerLogin",
-    "WorldMixin"
+    "PlayerPlaceBlock",
+    "fire.EndCrystalIgnite",
+    "fire.ExplosionIgnite",
+    "fire.FireballIgnite",
+    "fire.FireChargeIgnite",
+    "fire.FlindAndSteelIgnite",
+    "fire.LavaIgnite",
+    "fire.OtherIgnite"
   ],
   "client": [
   ],
