@@ -3,20 +3,9 @@
   "package": "net.devtech.onemixin.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "OnUse",
-    "PlayerBreakBlock",
-    "PlayerLeave",
-    "PlayerLogin",
-    "PlayerPlaceBlock",
-    "SignChange",
-    "WorldClose",
-    "fire.EndCrystalIgnite",
-    "fire.ExplosionIgnite",
-    "fire.FireballIgnite",
-    "fire.FireChargeIgnite",
-    "fire.FlindAndSteelIgnite",
-    "fire.LavaIgnite",
-    "fire.OtherIgnite"
+    "EntityDamage",
+    "EntityLand",
+    "PlayerPlaceBlock"
   ],
   "client": [
   ],
