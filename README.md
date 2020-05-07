@@ -8,7 +8,6 @@ a collection of simple events/utilities for fabric
 # Contributing
   - just add some test code, the mixin / class, and then pr it, make sure to include the licence header
 # How do I use this?
+  - check in the LOOK IN HERE folder for each event
   - just copy paste the file, if it's in it's own folder, then copy all the classes in the folder
   - each file/folder is it's own thing, none of them depend on each other
-
-Each file has it's own licence, so make sure to check those
