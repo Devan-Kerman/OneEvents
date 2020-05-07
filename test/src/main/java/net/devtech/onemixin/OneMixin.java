@@ -2,6 +2,9 @@ package net.devtech.onemixin;
 
 import net.devtech.onemixin.scheduler.Scheduler;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.world.RayTraceContext;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OneMixin implements ModInitializer {
 	@Override

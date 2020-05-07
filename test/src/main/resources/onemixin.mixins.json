@@ -3,9 +3,7 @@
   "package": "net.devtech.onemixin.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "EntityDamage",
-    "EntityLand",
-    "PlayerPlaceBlock"
+    "XpGainEvent"
   ],
   "client": [
   ],

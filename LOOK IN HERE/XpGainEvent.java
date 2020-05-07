@@ -1,11 +1,10 @@
 package net.devtech.onemixin.mixin;
 
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import java.util.Random;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * This is free and unencumbered software released into the public domain.
@@ -33,12 +32,20 @@ import java.util.Random;
  *
  * For more information, please refer to <http://unlicense.org/>
  */
-@Mixin(LivingEntity.class)
-public abstract class EntityLand {
-	@Shadow public abstract Random getRandom();
+@Mixin(PlayerEntity.class)
+public class XpGainEvent {
+	@Inject(method = "addExperience", at = @At("HEAD"), cancellable = true)
+	private void addExperience(int experience, CallbackInfo ci) {
+		if(!this.addExperience(experience))
+			ci.cancel();
+	}
 
-	@ModifyVariable (method = "handleFallDamage", at = @At("HEAD"), argsOnly = true, index = 1, ordinal = 0)
-	private float handleFallDamageEvent(float fall, float multiplier) {
-		return fall * this.getRandom().nextInt(2); // edit fall distance here
+	/**
+	 * called when a player gains experience
+	 * @param exp the amount of xp points gained
+	 * @return true of the player should gain the experience
+	 */
+	private boolean addExperience(int exp) {
+		return true;
 	}
 }
