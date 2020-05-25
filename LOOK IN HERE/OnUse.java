@@ -39,7 +39,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 @Mixin(BlockState.class)
 public class OnUse {
-	@Inject(method = "onUse", at = @At("RETURN"))
+	@Inject(method = "onUse", at = @At("RETURN"), cancellable = true)
 	private void use(World world, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
 		if(cir.getReturnValue() == ActionResult.PASS) {
 			cir.setReturnValue(this.onUse(world, player, hand, hit));

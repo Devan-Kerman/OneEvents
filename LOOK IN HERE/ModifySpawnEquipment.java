@@ -1,18 +1,14 @@
 package net.devtech.onemixin.mixin;
 
-import com.mojang.authlib.GameProfile;
-import net.minecraft.server.PlayerManager;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Text;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import java.net.SocketAddress;
-import java.util.Random;
 
 /**
- *
  * This is free and unencumbered software released into the public domain.
  *
  * Anyone is free to copy, modify, publish, use, compile, sell, or
@@ -38,26 +34,22 @@ import java.util.Random;
  *
  * For more information, please refer to <http://unlicense.org/>
  */
-@Mixin(PlayerManager.class)
-public class PlayerLogin {
-	@Inject(method = "checkCanJoin", at = @At("HEAD"), cancellable = true)
-	private void canJoin(SocketAddress socketAddress, GameProfile gameProfile, CallbackInfoReturnable<Text> cir) {
-		Text deny = this.deny(socketAddress, gameProfile);
-		if(deny != null)
-			cir.setReturnValue(deny);
+@Mixin(MobEntity.class)
+public class ModifySpawnEquipment {
+	@Inject(method = "getEquipmentForSlot", at = @At("HEAD"), cancellable = true)
+	private static void get(EquipmentSlot equipmentSlot, int equipmentLevel, CallbackInfoReturnable<Item> cir) {
+		Item item = getEquipment(equipmentSlot, equipmentLevel);
+		if(item != null)
+			cir.setReturnValue(item);
 	}
 
 	/**
-	 * Return the text the player should be sent if he was denied entry to the server,
-	 * this wont allow you to deny players entering their own worlds though.
-	 *
-	 * if the player is allowed in, return null
-	 * @return the kick message for the connecting player
+	 * get the item the mob should use for that slot
+	 * @param slot the slot
+	 * @param equipmentLevel the equipment level 0 = leather, 1 = gold, 2 = chain, 3 = iron, 4 = diamond
+	 * @return null if the default vanilla behavior should be used instead
 	 */
-	private Text deny(SocketAddress address, GameProfile player) {
-		if(new Random().nextBoolean())
-			return new LiteralText("You're not welcome here."); // player not allowed in
-		else
-			return null; // player allowed in
+	private static Item getEquipment(EquipmentSlot slot, int equipmentLevel) {
+		return null;
 	}
 }

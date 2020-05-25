@@ -1,18 +1,15 @@
 package net.devtech.onemixin.mixin;
 
-import com.mojang.authlib.GameProfile;
-import net.minecraft.server.PlayerManager;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import java.net.SocketAddress;
-import java.util.Random;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.world.dimension.DimensionType;
 
 /**
- *
  * This is free and unencumbered software released into the public domain.
  *
  * Anyone is free to copy, modify, publish, use, compile, sell, or
@@ -26,7 +23,7 @@ import java.util.Random;
  * of the public at large and to the detriment of our heirs and
  * successors. We intend this dedication to be an overt act of
  * relinquishment in perpetuity of all present and future rights to this
- * software under copyright law.
+ * software under copyright LAW.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
@@ -38,26 +35,21 @@ import java.util.Random;
  *
  * For more information, please refer to <http://unlicense.org/>
  */
-@Mixin(PlayerManager.class)
-public class PlayerLogin {
-	@Inject(method = "checkCanJoin", at = @At("HEAD"), cancellable = true)
-	private void canJoin(SocketAddress socketAddress, GameProfile gameProfile, CallbackInfoReturnable<Text> cir) {
-		Text deny = this.deny(socketAddress, gameProfile);
-		if(deny != null)
-			cir.setReturnValue(deny);
+@Mixin (ServerPlayerEntity.class)
+public class PlayerDimensionEvent {
+	@Inject (method = "changeDimension",
+	         at = @At ("HEAD"), cancellable = true)
+	private void changed(DimensionType newDimension, CallbackInfoReturnable<Entity> cir) {
+		if (this.change(newDimension)) cir.setReturnValue(null);
 	}
 
 	/**
-	 * Return the text the player should be sent if he was denied entry to the server,
-	 * this wont allow you to deny players entering their own worlds though.
+	 * this.getDimension is the current dimension
 	 *
-	 * if the player is allowed in, return null
-	 * @return the kick message for the connecting player
+	 * @param type the dimension being traveled to
+	 * @return true if the player should not travel to the dimension
 	 */
-	private Text deny(SocketAddress address, GameProfile player) {
-		if(new Random().nextBoolean())
-			return new LiteralText("You're not welcome here."); // player not allowed in
-		else
-			return null; // player allowed in
+	public boolean change(DimensionType type) {
+		return true;
 	}
 }

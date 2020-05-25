@@ -3,8 +3,7 @@
   "package": "net.devtech.onemixin.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-  ],
-  "client": [
+    "PlayerDimensionEvent"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -39,7 +39,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class SignChange {
 	@Shadow @Final public Text[] text;
 
-	@Inject(method = "setTextOnRow", at = @At("HEAD"))
+	@Inject(method = "setTextOnRow", at = @At("HEAD"), cancellable = true)
 	private void set(int row, Text text, CallbackInfo ci) {
 		if(this.abortSignChange(row, this.text[row], text))
 			ci.cancel();
