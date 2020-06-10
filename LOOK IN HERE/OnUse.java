@@ -7,6 +7,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -54,6 +55,7 @@ public class OnUse {
 	 * @param result the result of the block
 	 * @return the action to perform
 	 */
+	@Unique
 	private ActionResult onUse(World world, PlayerEntity entity, Hand hand, BlockHitResult result) {
 		return ActionResult.PASS;
 	}

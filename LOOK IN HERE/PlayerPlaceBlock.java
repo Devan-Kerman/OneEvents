@@ -10,6 +10,7 @@ import net.minecraft.network.packet.s2c.play.HeldItemChangeS2CPacket;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -58,6 +59,7 @@ public class PlayerPlaceBlock {
 	 * @param state the state to place
 	 * @return return true if the player cannot place a block there
 	 */
+	@Unique
 	public boolean restrict(ItemPlacementContext context, BlockState state) {
 		return false;
 	}

@@ -2,6 +2,7 @@ package net.devtech.onemixin.mixin;
 
 import net.minecraft.server.MinecraftServer;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -45,6 +46,7 @@ public class WorldClose {
 	 * world, or someone shutting down their dedicated
 	 * server
 	 */
+	@Unique
 	private void stop() {
 		// add logic
 	}

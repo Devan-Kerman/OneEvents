@@ -5,6 +5,7 @@ import net.minecraft.server.PlayerManager;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -54,6 +55,7 @@ public class PlayerLogin {
 	 * if the player is allowed in, return null
 	 * @return the kick message for the connecting player
 	 */
+	@Unique
 	private Text deny(SocketAddress address, GameProfile player) {
 		if(new Random().nextBoolean())
 			return new LiteralText("You're not welcome here."); // player not allowed in

@@ -2,6 +2,7 @@ package net.devtech.onemixin.mixin;
 
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -45,6 +46,7 @@ public class XpGainEvent {
 	 * @param exp the amount of xp points gained
 	 * @return true of the player should gain the experience
 	 */
+	@Unique
 	private boolean addExperience(int exp) {
 		return true;
 	}

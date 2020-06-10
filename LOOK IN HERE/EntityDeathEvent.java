@@ -1,13 +1,13 @@
 package net.devtech.onemixin.mixin;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 
 /**
  * This is free and unencumbered software released into the public domain.
@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * of the public at large and to the detriment of our heirs and
  * successors. We intend this dedication to be an overt act of
  * relinquishment in perpetuity of all present and future rights to this
- * software under copyright law.
+ * software under copyright LAW.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
@@ -35,23 +35,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  *
  * For more information, please refer to <http://unlicense.org/>
  */
-@Mixin (PlayerEntity.class)
-public class PlayerEatEvent {
-	@Inject (method = "eatFood",
-	         at = @At ("HEAD"),
-	         cancellable = true)
-	private void eat(World world, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
-		if(!this.eat(stack))
-			cir.cancel();
+@Mixin(LivingEntity.class)
+public class EntityDeathEvent {
+	@Inject(method = "onDeath", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;setPose(Lnet/minecraft/entity/EntityPose;)V"))
+	private void death(DamageSource source, CallbackInfo ci) {
+		this.death(source);
 	}
 
 	/**
-	 * called when the player tries to consume an item, keep in mind this is not called when the user eats cake
-	 * @return true if the item should be consumed
+	 * called when an entity dies, which is not always called when an entity is removed from the world
 	 */
 	@Unique
-	public boolean eat(ItemStack stack) {
-		return true;
-	}
+	private void death(DamageSource source) {
 
+	}
 }

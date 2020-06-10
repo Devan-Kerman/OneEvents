@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -56,6 +57,7 @@ public class EntityCollideEvent {
 	 * @param y the y coordinate
 	 * @param z the z coordinate
 	 */
+	@Unique
 	private void onCollide(BlockState state, int x, int y, int z) {
 
 	}

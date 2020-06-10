@@ -15,6 +15,7 @@ import net.minecraft.entity.projectile.ShulkerBulletEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
@@ -77,6 +78,7 @@ public class EntityDamage {
 	 * @param damage the amount of damage
 	 * @return the new amount of damage
 	 */
+	@Unique
 	private float handleDamage(DamageSource source, float damage) {
 		return damage*.5f;
 	}

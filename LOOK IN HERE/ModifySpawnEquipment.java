@@ -4,6 +4,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -49,6 +50,7 @@ public class ModifySpawnEquipment {
 	 * @param equipmentLevel the equipment level 0 = leather, 1 = gold, 2 = chain, 3 = iron, 4 = diamond
 	 * @return null if the default vanilla behavior should be used instead
 	 */
+	@Unique
 	private static Item getEquipment(EquipmentSlot slot, int equipmentLevel) {
 		return null;
 	}

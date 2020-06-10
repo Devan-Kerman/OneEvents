@@ -3,6 +3,7 @@ package net.devtech.onemixin.mixin;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -44,6 +45,7 @@ public class PlayerLeave {
 	 * Called when a player leaves the server
 	 * @param entity the player that left
 	 */
+	@Unique
 	private void leave(ServerPlayerEntity entity) {
 
 	}

@@ -3,6 +3,10 @@
   "package": "net.devtech.onemixin.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ChunkEventMixin",
+    "ChunkEventMixin$ProtoChunkMixin",
+    "ChunkEventMixin$WorldChunkMixin",
+    "EntityDeathEvent",
     "PlayerDimensionEvent"
   ],
   "injectors": {

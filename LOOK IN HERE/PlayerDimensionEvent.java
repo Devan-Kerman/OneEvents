@@ -1,6 +1,7 @@
 package net.devtech.onemixin.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -49,6 +50,7 @@ public class PlayerDimensionEvent {
 	 * @param type the dimension being traveled to
 	 * @return true if the player should not travel to the dimension
 	 */
+	@Unique
 	public boolean change(DimensionType type) {
 		return true;
 	}
